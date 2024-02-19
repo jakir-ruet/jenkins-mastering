@@ -6,6 +6,28 @@
 
 ### Get started with Jenkins
 
+#### [Install](https://www.jenkins.io/doc/book/installing/macos/)
+```bash
+brew install jenkins-lts
+```
+```bash
+brew services start jenkins-lts
+```
+```bash
+brew services restart jenkins-lts
+```
+```bash
+brew brew upgrade jenkins-lts
+```
+Use the following command to get the password
+```bash
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+After getting the initial password and put required information & selecting the plugins we will configure jenkins.
+```bash
+http://localhost:8080
+```
+
 ## Courtesy of Jakir
 
 [![LinkedIn][linkedin-shield-jakir]][linkedin-url-jakir]
