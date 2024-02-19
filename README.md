@@ -23,7 +23,7 @@ Use the following command to get the password
 ```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
-After getting the initial password and put required information & selecting the plugins we will configure jenkins.
+After getting the initial password and put required information & selecting plugins we will configure jenkins.
 ```bash
 http://localhost:8080
 ```
