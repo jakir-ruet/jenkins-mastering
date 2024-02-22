@@ -6,18 +6,57 @@
 
 ### Get started with Jenkins
 
-#### [Install](https://www.jenkins.io/doc/book/installing/macos/)
+***Prerequisites***
+To follow this tutorial, you will need:
+1. Ubuntu Server 22.04 server configured with a non-root sudo user and firewall.
+2. OpenJDK 17 or upper
+
+#### [Java & OpenJDK Install](https://openjdk.org)
 ```bash
-brew install jenkins-lts
+sudo apt update
 ```
 ```bash
-brew services start jenkins-lts
+java -version
 ```
 ```bash
-brew services restart jenkins-lts
+sudo apt install default-jre
 ```
 ```bash
-brew brew upgrade jenkins-lts
+java -version
+```
+
+Other not for Jenkins
+```bash
+sudo apt install default-jdk
+```
+```bash
+javac -version
+```
+[Installing Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
+
+#### [Install](https://www.jenkins.io/doc/book/installing/linux/) Jenkins LTS.
+```bash
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+```
+```bash
+sudo apt-get update
+sudo apt-get install jenkins
+```
+```bash
+apt services restart jenkins-lts
+```
+Firewall Configuration
+```bash
+ufw allow 8080
+```
+```bash
+sudo ufw allow OpenSSH
+sudo ufw enable
+ufw status
 ```
 Use the following command to get the password
 ```bash
@@ -26,6 +65,9 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 After getting the initial password and put required information & selecting plugins we will configure jenkins.
 ```bash
 http://localhost:8080
+```
+```bash
+apt apt upgrade jenkins-lts
 ```
 
 ## Courtesy of Jakir
