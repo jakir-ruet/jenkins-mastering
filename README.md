@@ -70,6 +70,10 @@ http://localhost:8080
 apt apt upgrade jenkins-lts
 ```
 
+### Working Procedure
+
+![Working Procedure](./img/working-procedure.png)
+
 ## Courtesy of Jakir
 
 [![LinkedIn][linkedin-shield-jakir]][linkedin-url-jakir]
