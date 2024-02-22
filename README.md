@@ -9,7 +9,7 @@
 ***Prerequisites***
 To follow this tutorial, you will need:
 1. Ubuntu Server 22.04 server configured with a non-root sudo user and firewall.
-2. OpenJDK 17 or upper
+2. OpenJDK 11 or upper
 
 #### [Java & OpenJDK Install](https://openjdk.org)
 ```bash
