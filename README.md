@@ -17,13 +17,13 @@ To follow this tutorial, you will need:
 ```bash
 sudo apt update
 java -version
-sudo apt install openjdk-21-jre-headless # for 11 version (latest)
+sudo apt install openjdk-21-jre-headless # for 21 version (latest) - Recommended
 sudo apt install default-jre # for 11 version
 java -version
 ```
 
 #### [JDK Install (not for Jenkins)](https://www.oracle.com/java/technologies/downloads/)
-This not for ARM machine
+It is for  machine
 ```bash
 wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
 sudo dpkg -i jdk-21_linux-x64_bin.deb
@@ -39,7 +39,7 @@ wget https://download.oracle.com/java/21/latest/jdk-21_linux-aarch64_bin.tar.gz
 tar xvf jdk-21_linux-aarch64_bin.tar.gz
 mv jdk-21.0.2 /usr/local/
 ls -a
-nano /.profile
+nano .profile
 export PATH="$PATH:$HOME/usr/local/jdk-21.0.2/bin"
 ```
 
