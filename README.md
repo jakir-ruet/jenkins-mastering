@@ -8,17 +8,17 @@
 
 ***Prerequisites***
 To follow this tutorial, you will need:
-1. Ubuntu Server 22.04 server configured with a non-root sudo user and firewall.
+1. Ubuntu Server 22.04 server configured with a non-root user and firewall.
 2. OpenJDK 11 or upper
 
 #### Java & OpenJDK Install
 ##### [Open JDK Install](https://openjdk.org)
 
 ```bash
-sudo apt update
+apt update
 java -version
-sudo apt install openjdk-21-jre-headless # for 21 version (latest) - Recommended
-sudo apt install default-jre # for 11 version
+apt install openjdk-21-jre-headless # for 21 version (latest) - Recommended
+apt install default-jre # for 11 version
 java -version
 ```
 
@@ -26,15 +26,14 @@ java -version
 It is for  machine
 ```bash
 wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
-sudo dpkg -i jdk-21_linux-x64_bin.deb
+dpkg -i jdk-21_linux-x64_bin.deb
 java -version
 ```
 
-***for ARM machine*** 
-checking the previous path
+***For ARM machine*** 
 
 ```bash
-echo "$PATH"
+echo "$PATH"  # checking the previous path
 wget https://download.oracle.com/java/21/latest/jdk-21_linux-aarch64_bin.tar.gz
 tar xvf jdk-21_linux-aarch64_bin.tar.gz
 mv jdk-21.0.2 /usr/local/
@@ -53,16 +52,15 @@ java --version
 
 #### [Install](https://www.jenkins.io/doc/book/installing/linux/) Jenkins LTS.
 ```bash
-sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+wget -O /usr/share/keyrings/jenkins-keyring.asc \
   https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  https://pkg.jenkins.io/debian-stable binary/ | tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 ```
 ```bash
-sudo apt-get update
-sudo apt-get install jenkins
-apt services restart jenkins-lts
+apt-get update
+apt-get install jenkins
 ```
 ```bash
 
@@ -70,14 +68,14 @@ apt services restart jenkins-lts
 Firewall Configuration
 ```bash
 ufw allow 8080
-sudo ufw allow OpenSSH
-sudo ufw enable
+ufw allow OpenSSH
+ufw enable
 ufw status
 ```
 
 Use the following command to get the password
 ```bash
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 After getting the initial password and put required information & selecting plugins we will configure jenkins.
 ```bash
