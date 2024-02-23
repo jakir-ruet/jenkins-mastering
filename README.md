@@ -11,28 +11,45 @@ To follow this tutorial, you will need:
 1. Ubuntu Server 22.04 server configured with a non-root sudo user and firewall.
 2. OpenJDK 11 or upper
 
-#### [Java & OpenJDK Install](https://openjdk.org)
+#### Java & OpenJDK Install
+##### [Open JDK Install](https://openjdk.org)
+
 ```bash
 sudo apt update
-```
-```bash
 java -version
-```
-```bash
-sudo apt install default-jre
-```
-```bash
+sudo apt install openjdk-21-jre-headless # for 11 version (latest)
+sudo apt install default-jre # for 11 version
 java -version
 ```
 
-Other not for Jenkins
+#### [JDK Install (not for Jenkins)](https://www.oracle.com/java/technologies/downloads/)
+This not for ARM machine
 ```bash
-sudo apt install default-jdk
+wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
+sudo dpkg -i jdk-21_linux-x64_bin.deb
+java -version
 ```
+
+***for ARM machine*** 
+checking the previous path
+
 ```bash
-javac -version
+echo "$PATH"
+wget https://download.oracle.com/java/21/latest/jdk-21_linux-aarch64_bin.tar.gz
+tar xvf jdk-21_linux-aarch64_bin.tar.gz
+mv jdk-21.0.2 /usr/local/
+ls -a
+nano /.profile
+export PATH="$PATH:$HOME/usr/local/jdk-21.0.2/bin"
 ```
-[Installing Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
+
+It make variables available in your current shell session.
+
+```bash
+source ~/.profile
+echo $PATH
+java --version
+```
 
 #### [Install](https://www.jenkins.io/doc/book/installing/linux/) Jenkins LTS.
 ```bash
@@ -45,19 +62,19 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 ```bash
 sudo apt-get update
 sudo apt-get install jenkins
+apt services restart jenkins-lts
 ```
 ```bash
-apt services restart jenkins-lts
+
 ```
 Firewall Configuration
 ```bash
 ufw allow 8080
-```
-```bash
 sudo ufw allow OpenSSH
 sudo ufw enable
 ufw status
 ```
+
 Use the following command to get the password
 ```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
@@ -66,13 +83,14 @@ After getting the initial password and put required information & selecting plug
 ```bash
 http://localhost:8080
 ```
+if its need
 ```bash
 apt apt upgrade jenkins-lts
 ```
 
-### Working Procedure
+### Working Principle
 
-![Working Procedure](./img/working-procedure.png)
+![Working Principle](./img/working-principle.png)
 
 ## Courtesy of Jakir
 
