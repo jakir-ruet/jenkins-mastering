@@ -21,6 +21,17 @@ apt install openjdk-21-jre-headless # for 21 version (latest) - Recommended
 apt install default-jre # for 11 version
 java -version
 ```
+Path variable add
+```bash
+whereis java
+find /usr/lib/jvm/java | head -n 3
+apt install openjdk-21-jre-headless
+nano ~/.profile
+JAVA_HOME=/usr/bin
+PATH=$PATH:$HOME/bin:$JAVA_HOME
+export PATH
+echo $JAVA_HOME
+```
 
 #### [JDK Install (not for Jenkins)](https://www.oracle.com/java/technologies/downloads/)
 It is for  machine
