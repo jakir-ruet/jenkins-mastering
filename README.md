@@ -21,7 +21,7 @@ apt install openjdk-21-jre-headless # for 21 version (latest) - Recommended
 apt install default-jre # for 11 version
 java -version
 ```
-Path variable add
+Path variable add (If you need)
 ```bash
 whereis java
 find /usr/lib/jvm/java | head -n 3
