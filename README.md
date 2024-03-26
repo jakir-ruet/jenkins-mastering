@@ -103,10 +103,25 @@ apt apt upgrade jenkins-lts
 
 Setup JDK
 ```bash
+https://openjdk.org/install/
+https://jdk.java.net/21/
+wget https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_linux-x64_bin.tar.gz
+tar zxvf openjdk-21.0.2_linux-x64_bin.tar.gz
+
+find /usr/lib/jvm/java* | head -n 3
+/usr/lib/jvm/java-1.21.0-openjdk-amd64
+/usr/lib/jvm/java-21-openjdk-amd64
+/usr/lib/jvm/java-21-openjdk-amd64/release
+
+JAVA_HOME=/usr/lib/jvm/
+PATH=$PATH:$HOME/bin:$JAVA_HOME
+export PATH
+source .profile
+echo $JAVA_HOME
+java --version
 Add JDK
 JAVA_HOME
-echo $JAVA_HOME
-/usr/lib/jvm/java-1.21.0-openjdk-amd64
+/usr/lib/jvm/
 ```
 
 Github
@@ -124,10 +139,13 @@ mv apache-maven-3.9.6 maven
 
 cd maven
 ```bash
+nano .profile
 M2_HOME=/opt/maven
 M2=/opt/maven/bin
 PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2:$M2_HOME
 export PATH
+source .profile
+echo $M2_HOME
 mvn --version
 ```
 
