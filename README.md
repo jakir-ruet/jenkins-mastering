@@ -114,12 +114,14 @@ Github
 - configure from tool management
 
 [Maven install](https://maven.apache.org/install.html)
+
 cd /opt
 ```bash
 wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
 tar zxvf apache-maven-3.9.6-bin.tar.gz 
 mv apache-maven-3.9.6 maven
 ```
+
 cd maven
 ```bash
 M2_HOME=/opt/maven
