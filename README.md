@@ -13,6 +13,22 @@ To follow this tutorial, you will need:
 
 #### Java & OpenJDK Install
 ##### [Open JDK Install](https://jdk.java.net/21/)
+```bash
+apt install openjdk-21-jre-headless
+find /usr/lib/jvm/java* | head -n 3 # searching if required
+cd /usr/bin/
+java --version
+nano .profile 
+JAVA_HOME=/usr/lib/jvm/java-21 # set java path variable
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+export PATH
+source .profile
+java --version
+echo $PATH
+echo $JAVA_HOME
+```
+
+Or
 
 ```bash
 apt update
@@ -23,7 +39,6 @@ wget https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027a
 tar zxvf openjdk-21.0.2_linux-aarch64_bin.tar.gz
 mv jdk-21.0.2 java-21
 whereis java # searching if required
-find /opt/java-21/java-1.21* | head -n 3 # searching if required
 nano .profile 
 JAVA_HOME=/opt/java-21 # set java path variable
 PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
@@ -67,29 +82,6 @@ http://localhost:8080
 if its need
 ```bash
 apt apt upgrade jenkins-lts
-```
-
-Setup JDK
-```bash
-https://openjdk.org/install/
-https://jdk.java.net/21/
-wget https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_linux-x64_bin.tar.gz
-tar zxvf openjdk-21.0.2_linux-x64_bin.tar.gz
-
-find /usr/lib/jvm/java* | head -n 3
-/usr/lib/jvm/java-1.21.0-openjdk-amd64
-/usr/lib/jvm/java-21-openjdk-amd64
-/usr/lib/jvm/java-21-openjdk-amd64/release
-
-JAVA_HOME=/usr/lib/jvm/
-PATH=$PATH:$HOME/bin:$JAVA_HOME
-export PATH
-source .profile
-echo $JAVA_HOME
-java --version
-Add JDK
-JAVA_HOME
-/usr/lib/jvm/
 ```
 
 Github
