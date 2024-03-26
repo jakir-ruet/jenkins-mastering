@@ -24,12 +24,15 @@ java -version
 Path variable add (If you need)
 ```bash
 whereis java
-find /usr/lib/jvm/java | head -n 3
+find /usr/lib/jvm/java-1.21* | head -n 3
+/usr/lib/jvm/java-1.21.0-openjdk-arm64
 apt install openjdk-21-jre-headless
 nano ~/.profile
 JAVA_HOME=/usr/bin
 PATH=$PATH:$HOME/bin:$JAVA_HOME
 export PATH
+source ~/.profile
+echo $PATH
 echo $JAVA_HOME
 ```
 
@@ -72,6 +75,7 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 ```bash
 apt-get update
 apt-get install jenkins
+service jenkins status
 ```
 ```bash
 
@@ -96,6 +100,37 @@ if its need
 ```bash
 apt apt upgrade jenkins-lts
 ```
+
+Setup JDK
+```bash
+Add JDK
+JAVA_HOME
+echo $JAVA_HOME
+/usr/lib/jvm/java-1.21.0-openjdk-amd64
+```
+
+Github
+- install github plugin from plugin management
+- configure from tool management
+
+[Maven install](https://maven.apache.org/install.html)
+cd /opt
+```bash
+wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+tar zxvf apache-maven-3.9.6-bin.tar.gz 
+mv apache-maven-3.9.6 maven
+```
+cd maven
+```bash
+M2_HOME=/opt/maven
+M2=/opt/maven/bin
+PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2:$M2_HOME
+export PATH
+mvn --version
+```
+
+- create maven app
+- push to github & integrate to jenkins
 
 ### Working Principle
 
