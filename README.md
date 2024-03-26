@@ -12,56 +12,26 @@ To follow this tutorial, you will need:
 2. OpenJDK 11 or upper
 
 #### Java & OpenJDK Install
-##### [Open JDK Install](https://openjdk.org)
+##### [Open JDK Install](https://jdk.java.net/21/)
 
 ```bash
 apt update
 java -version
-apt install openjdk-21-jre-headless # for 21 version (latest) - Recommended
-apt install default-jre # for 11 version
-java -version
-```
-Path variable add (If you need)
-```bash
-whereis java
-find /usr/lib/jvm/java-1.21* | head -n 3
-/usr/lib/jvm/java-1.21.0-openjdk-arm64
-apt install openjdk-21-jre-headless
-nano ~/.profile
-JAVA_HOME=/usr/bin
-PATH=$PATH:$HOME/bin:$JAVA_HOME
+cd /opt
+# as per your OS you should download specified version. my case aarch64.
+wget https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_linux-aarch64_bin.tar.gz
+tar zxvf openjdk-21.0.2_linux-aarch64_bin.tar.gz
+mv jdk-21.0.2 java-21
+whereis java # searching if required
+find /opt/java-21/java-1.21* | head -n 3 # searching if required
+nano .profile 
+JAVA_HOME=/opt/java-21 # set java path variable
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
 export PATH
-source ~/.profile
+source .profile
+java --version
 echo $PATH
 echo $JAVA_HOME
-```
-
-#### [JDK Install (not for Jenkins)](https://www.oracle.com/java/technologies/downloads/)
-It is for  machine
-```bash
-wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
-dpkg -i jdk-21_linux-x64_bin.deb
-java -version
-```
-
-***For ARM machine*** 
-
-```bash
-echo "$PATH"  # checking the previous path
-wget https://download.oracle.com/java/21/latest/jdk-21_linux-aarch64_bin.tar.gz
-tar xvf jdk-21_linux-aarch64_bin.tar.gz
-mv jdk-21.0.2 /usr/local/
-ls -a
-nano .profile
-export PATH="$PATH:$HOME/usr/local/jdk-21.0.2/bin"
-```
-
-It make variables available in your current shell session.
-
-```bash
-source ~/.profile
-echo $PATH
-java --version
 ```
 
 #### [Install](https://www.jenkins.io/doc/book/installing/linux/) Jenkins LTS.
@@ -77,9 +47,7 @@ apt-get update
 apt-get install jenkins
 service jenkins status
 ```
-```bash
 
-```
 Firewall Configuration
 ```bash
 ufw allow 8080
