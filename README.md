@@ -15,11 +15,8 @@ To follow this tutorial, you will need:
 ##### [Open JDK Install](https://jdk.java.net/21/)
 ```bash
 apt install openjdk-21-jre-headless
-find /usr/lib/jvm/java* | head -n 3 # searching if required
-cd /usr/bin/
-java --version
-nano .profile 
-JAVA_HOME=/usr/lib/jvm/java-21 # set java path variable
+find /usr/lib/jvm/java-21-openjdk-arm64/java* | head -n 3 # searching if required
+JAVA_HOME=/usr/lib/jvm/java-21-openjdk-arm64 # set java path variable
 PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
 export PATH
 source .profile
