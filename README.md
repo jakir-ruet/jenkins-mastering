@@ -107,6 +107,36 @@ echo $M2_HOME
 mvn --version
 ```
 
+#### [Install](https://gradle.org/install/) Gradle.
+⁠```bash
+mkdir gradle
+cd /opt/gradle
+wget https://gradle.org/next-steps/?version=8.7&format=bin
+apt install unzip
+unzip gradle-8.7-bin.zip
+nano .bashrc
+GRADLE_HOME=/opt/gradle/gradle-8.7 # gradle path variable
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$M2:$M2_HOME:$GRADLE_HOME/bin
+source /.bashrc
+echo $GRADLE_HOME
+gradle -v # check version
+```
+
+#### [Install](https://nodejs.org/en/download/prebuilt-binaries) NodeJS.
+⁠```bash
+cd /opt
+wget https://nodejs.org/dist/v20.12.0/node-v20.12.0-linux-x64.tar.xz
+tar xf node-v20.12.0-linux-x64.tar.xz
+mv node-v20.12.0-linux-x64 nodejs-20
+nano .bashrc
+# nodejs path variable
+NODEJS_HOME=/opt/nodejs-20
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$M2:$M2_HOME:$GRADLE_HOME/bin:$NODEJS_HOME/bin
+source /.bashrc
+echo $NODEJS_HOME
+node -v # check version
+```
+
 - create maven app
 - push to github & integrate to jenkins
 
