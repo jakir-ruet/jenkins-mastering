@@ -108,7 +108,7 @@ mvn --version
 ```
 
 #### [Install](https://gradle.org/install/) Gradle.
-⁠```bash
+```bash
 mkdir gradle
 cd /opt/gradle
 wget https://gradle.org/next-steps/?version=8.7&format=bin
@@ -123,7 +123,7 @@ gradle -v # check version
 ```
 
 #### [Install](https://nodejs.org/en/download/prebuilt-binaries) NodeJS.
-⁠```bash
+```bash
 cd /opt
 wget https://nodejs.org/dist/v20.12.0/node-v20.12.0-linux-x64.tar.xz
 tar xf node-v20.12.0-linux-x64.tar.xz
