@@ -109,13 +109,12 @@ mvn --version
 
 #### [Install](https://gradle.org/install/) Gradle.
 ```bash
-mkdir gradle
-cd /opt/gradle
-wget https://gradle.org/next-steps/?version=8.7&format=bin
+cd /opt
+wget https://services.gradle.org/distributions/gradle-8.8-bin.zip
 apt install unzip
 unzip gradle-8.7-bin.zip
 nano .bashrc
-GRADLE_HOME=/opt/gradle/gradle-8.7 # gradle path variable
+GRADLE_HOME=/opt/gradle-8.7 # gradle path variable
 PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$M2:$M2_HOME:$GRADLE_HOME/bin
 source /.bashrc
 echo $GRADLE_HOME
