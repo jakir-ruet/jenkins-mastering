@@ -4,7 +4,7 @@
 
 ### Prerequisites (To follow this tutorial, you will need)
 
-1. Ubuntu Server 22.04 server configured with a non-root user and firewall
+1. Any Linux OS (Ubuntu, RedHat) configured with a non-root user and firewall
 2. OpenJDK 11 or upper
 
 ### Java & [OpenJDK](https://jdk.java.net/21/) Install
@@ -90,8 +90,8 @@ apt apt upgrade jenkins-lts
 
 ### Github
 
-- install github plugin from plugin management
-- configure from tool management
+- Install github plugin from plugin management
+- Configure from tool management
 
 ### [Maven install](https://maven.apache.org/install.html)
 
@@ -144,12 +144,303 @@ echo $NODEJS_HOME
 node -v # check version
 ```
 
-- Create maven app
-- Push to github & integrate to jenkins
-
 ### Working Principle
 
 ![Working Principle](./img/working-principle.png)
+
+### Pipeline Components
+
+Components are the fundamental building blocks of Jenkins that collectively define and manage the complete build, test, and deployment workflow.
+
+#### Pipeline
+
+A Pipeline in root block in Jenkins is a set of steps or instructions written in code (Jenkinsfile) to automate the build, test, and deploy process.
+
+##### Declarative Pipeline
+
+- Recommended for most users
+- Uses a structured, simpler syntax
+- Easier to read, maintain, and validate
+
+```bash
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+}
+```
+
+##### Scripted Pipeline
+
+- Fully Groovy-based (more flexible, powerful)
+- Requires programming knowledge (Groovy/Java)
+- For complex or customized logic
+
+```bash
+node {
+    stage('Build') {
+        echo 'Building...'
+    }
+    stage('Test') {
+        echo 'Testing...'
+    }
+    stage('Deploy') {
+        echo 'Deploying...'
+    }
+}
+```
+
+##### Comparison Table: Scripted vs Declarative
+
+```bash
+| **Aspect**        | **Declarative Pipeline**                                 | **Scripted Pipeline**       |
+| ----------------- | -------------------------------------------------------- | --------------------------- |
+| **Syntax**        | DSL (Domain Specific Language)                           | Pure Groovy scripting       |
+| **Readability**   | ✅ Easier                                                 | ❌ Less beginner-friendly    |
+| **Validation**    | ✅ Jenkins validates                                      | ❌ Manual debugging required |
+| **Flexibility**   | ❌ Some limits                                            | ✅ Highly flexible           |
+| **Structure**     | Predefined structure (pipeline → agent → stages → steps) | Freeform                    |
+| **Use Case**      | ✅ Simple to moderately complex CI/CD                     | ✅ Complex, custom logic     |
+| **Introduced In** | Jenkins 2.x                                              | Jenkins 1.x                 |
+| **Preferred**     | ✅ Beginners & regular use                                | ✅ Advanced users            |
+```
+
+- **Mixing Both** You can use Scripted syntax inside Declarative Pipelines with script block for complex logic.
+
+```bash
+pipeline {
+    agent any
+    stages {
+        stage('Mixed') {
+            steps {
+                script {
+                    for (int i = 0; i < 3; i++) {
+                        echo "Loop ${i}"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+- **Which Should You Use?**
+
+```bash
+| If you are                          | **Use**           |
+| ----------------------------------- | ----------------- |
+| New to Jenkins / Simple workflows   | ✅ **Declarative** |
+| Need complex/custom workflows       | ✅ **Scripted**    |
+| Working in a team with mixed skills | ✅ **Declarative** |
+```
+
+#### Agent
+
+Agent where the pipeline (or stage) will run. It can be a Jenkins node, Docker container, or specific label. (the Jenkins worker/agent/executor machine).
+
+```bash
+pipeline {
+  agent any                     // runs on any available agent
+  agent { label 'docker-node' } // run only on nodes labeled "docker-node"
+  agent none                   // you’ll define agent per stage
+}
+```
+
+#### Stage
+
+A Stage is one major phase of pipeline. Helps you organize logically.
+
+- Usually used for: `Build`, `Test`, `Deploy`, etc.
+- You will see it in `Jenkins UI` as visual steps.
+
+#### Step
+
+Steps are individual tasks inside a stage. Think of steps as commands or actions.
+
+```bash
+stages {
+  stage('Build') {
+    steps {
+      echo "Building the project"
+    }
+    steps {
+      echo "Running build process"
+      sh "npm install"
+    }
+  }
+}
+```
+
+#### Environment
+
+Define environment variables for the entire pipeline or a specific stage.
+
+```bash
+environment {
+    APP_ENV = 'production'
+}
+```
+
+#### Post
+
+Define actions to happen after stages: success, failure, always.
+
+```bash
+post {
+    success { echo "Success!" }
+    failure { echo "Failed!" }
+}
+```
+
+#### Parameters (Optional)
+
+For Parameterized Builds—use when you want user input or dynamic values.
+
+```bash
+parameters {
+    string(name: 'BRANCH', defaultValue: 'main')
+}
+```
+
+#### Tools
+
+Auto-installs tools like Maven, JDK, NodeJS
+
+#### options
+
+Configure pipeline behavior (e.g., timeouts, retries)
+
+#### when
+
+Conditional execution of stages
+
+#### input
+
+Pause for manual approval
+
+#### parallel
+
+Run multiple branches/stages at the same time
+
+#### timeout
+
+Limit time for stage execution (via options)
+
+#### credentials
+
+Use stored credentials securely
+
+#### libraries
+
+Use shared libraries to DRY your Jenkinsfiles
+
+#### Jenkinefile
+
+```bash
+pipeline {
+    /* 👉 Component 1: agent - Where this pipeline will run */
+    agent any
+
+    /* 👉 Component 2: environment - Define environment variables */
+    environment {
+        APP_NAME = 'myapp'
+        VERSION = '1.0.0'
+    }
+
+    /* 👉 Component 3: parameters - Accept input from user before job runs */
+    parameters {
+        string(name: 'DEPLOY_ENV', defaultValue: 'dev', description: 'Deployment environment')
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run tests?')
+    }
+
+    /* 👉 Component 4: options - Control behavior of the build */
+    options {
+        timeout(time: 20, unit: 'MINUTES')
+        skipDefaultCheckout()    // Don't checkout repo automatically
+        buildDiscarder(logRotator(numToKeepStr: '5'))  // Keep last 5 builds only
+    }
+
+    stages {
+        /* 👉 Component 5: stages - Group of all stages */
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building ${APP_NAME} version ${VERSION}"
+                sh './gradlew build'
+            }
+        }
+
+        stage('Test') {
+            when {
+                expression { return params.RUN_TESTS }
+            }
+            parallel {
+                stage('Unit Tests') {
+                    steps {
+                        sh './gradlew test'
+                    }
+                }
+                stage('Integration Tests') {
+                    steps {
+                        sh './gradlew integrationTest'
+                    }
+                }
+            }
+        }
+
+        stage('Approval') {
+            when {
+                branch 'main'
+            }
+            steps {
+                input message: 'Approve deployment to production?', ok: 'Deploy'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying ${APP_NAME} version ${VERSION} to ${params.DEPLOY_ENV}"
+                sh "./deploy.sh ${params.DEPLOY_ENV}"
+            }
+        }
+    }
+
+    /* 👉 Component 6: post - Define actions after build completes */
+    post {
+        success {
+            echo '✅ Pipeline completed successfully!'
+        }
+        failure {
+            echo '❌ Pipeline failed!'
+        }
+        always {
+            echo '📦 Cleaning up workspace...'
+            cleanWs()
+        }
+    }
+}
+```
 
 ## With Regards, `Jakir`
 
