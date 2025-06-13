@@ -207,18 +207,16 @@ node {
 
 ##### Comparison Table: Scripted vs Declarative
 
-```bash
-| **Aspect**        | **Declarative Pipeline**                                 | **Scripted Pipeline**       |
-| ----------------- | -------------------------------------------------------- | --------------------------- |
-| **Syntax**        | DSL (Domain Specific Language)                           | Pure Groovy scripting       |
-| **Readability**   | ✅ Easier                                                 | ❌ Less beginner-friendly    |
-| **Validation**    | ✅ Jenkins validates                                      | ❌ Manual debugging required |
-| **Flexibility**   | ❌ Some limits                                            | ✅ Highly flexible           |
-| **Structure**     | Predefined structure (pipeline → agent → stages → steps) | Freeform                    |
-| **Use Case**      | ✅ Simple to moderately complex CI/CD                     | ✅ Complex, custom logic     |
-| **Introduced In** | Jenkins 2.x                                              | Jenkins 1.x                 |
-| **Preferred**     | ✅ Beginners & regular use                                | ✅ Advanced users            |
-```
+| **Aspect**        | **Declarative Pipeline**                           | **Scripted Pipeline**       |
+| ----------------- | -------------------------------------------------- | --------------------------- |
+| **Syntax**        | DSL (Domain Specific Language)                     | Pure Groovy scripting       |
+| **Readability**   | ✅ Easier                                           | ❌ Less beginner-friendly    |
+| **Validation**    | ✅ Jenkins validates                                | ❌ Manual debugging required |
+| **Flexibility**   | ❌ Some limits                                      | ✅ Highly flexible           |
+| **Structure**     | Predefined structure (pipeline→agent→stages→steps) | Freeform                    |
+| **Use Case**      | ✅ Simple to moderately complex CI/CD               | ✅ Complex, custom logic     |
+| **Introduced In** | Jenkins 2.x                                        | Jenkins 1.x                 |
+| **Preferred**     | ✅ Beginners & regular use                          | ✅ Advanced users            |
 
 - **Mixing Both** You can use Scripted syntax inside Declarative Pipelines with script block for complex logic.
 
@@ -241,13 +239,11 @@ pipeline {
 
 - **Which Should You Use?**
 
-```bash
-| If you are                          | **Use**           |
+| **If you are**                      | **Use**           |
 | ----------------------------------- | ----------------- |
 | New to Jenkins / Simple workflows   | ✅ **Declarative** |
 | Need complex/custom workflows       | ✅ **Scripted**    |
 | Working in a team with mixed skills | ✅ **Declarative** |
-```
 
 #### Agent
 
