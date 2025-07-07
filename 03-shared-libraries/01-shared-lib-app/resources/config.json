@@ -1,0 +1,9 @@
+{
+	"appName": "MyApp",
+	"version": "1.0.0",
+	"features": {
+	  "logging": true,
+	  "debugMode": false
+	}
+  }
+  

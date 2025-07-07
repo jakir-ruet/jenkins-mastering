@@ -1,0 +1,31 @@
+node {
+    // Stage 1: Checkout Code
+    stage('Checkout') {
+        echo 'Cloning the repository...'
+        git url: 'https://github.com/jakir-ruet/war-mvn-springboot-app.git'
+    }
+
+    // Stage 2: Build
+    stage('Build') {
+        echo 'Building the application...'
+        sh 'mvn clean compile'
+    }
+
+    // Stage 3: Run Tests
+    stage('Test') {
+        echo 'Running unit tests...'
+        sh 'mvn test'
+    }
+
+    // Stage 4: Deploy (simulated)
+    stage('Deploy') {
+        echo 'Deploying the application (simulation)...'
+        sh 'echo Deploy successful!'
+    }
+
+    // Stage 5: Cleanup
+    stage('Cleanup') {
+        echo 'Cleaning workspace...'
+        deleteDir()
+    }
+}
