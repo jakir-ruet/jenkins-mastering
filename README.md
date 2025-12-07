@@ -98,7 +98,7 @@ apt apt upgrade jenkins-lts
 ```bash
 cd /opt
 wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
-tar zxvf apache-maven-3.9.6-bin.tar.gz 
+tar zxvf apache-maven-3.9.6-bin.tar.gz
 mv apache-maven-3.9.6 maven
 ```
 
@@ -437,6 +437,70 @@ pipeline {
     }
 }
 ```
+
+### Jenkins CI/CD Pipeline Flow
+
+This flow is divided into `four` main sections:
+
+1. Continuous Integration,
+2. Continuous Deployment,
+3. Continuous Delivery, and
+4. Post Build.
+
+#### Continuous Integration (CI)
+
+In this stage focuses on `building`, `testing`, `scanning`, and `containerizing` the code.
+
+| **Sub-Stage**         | **Action / Node Name**       | **Tool / Technology Implied**                            |
+| --------------------- | ---------------------------- | -------------------------------------------------------- |
+| **Initial Steps**     | Build / Install Dependencies | Maven, Gradle, NPM, Yarn (depending on project language) |
+| **Dependency Check**  | OWASP Dependency Check       | OWASP Dependency-Check (SCA Tool)                        |
+|                       | NPM Dependency Audits        | NPM Audit or similar JS/Node security tools              |
+| **Code Testing**      | Code Coverage                | JaCoCo, Istanbul/NYC                                     |
+|                       | Unit Testing Node 1          | JUnit, TestNG, Jest, Mocha                               |
+|                       | Unit Testing Node 2          | (Parallel testing node using same tools)                 |
+| **Security Scan**     | SAST                         | SonarQube, Checkmarx, Fortify (Static Analysis Tools)    |
+|                       | Quality Gates                | SonarQube Quality Gate (enforcing code quality metrics)  |
+| **Artifact Creation** | Dockerizing Build            | Docker CLI / Engine                                      |
+|                       | Vulnerability Scan           | Docker Scan, Trivy, Clair (Container Image Scanners)     |
+|                       | Push Image                   | Docker Hub, AWS ECR, Google GCR (Container Registry)     |
+
+#### Continuous Deployment (CD)
+
+This stage deploys the tested artifact to a VM for immediate integration testing.
+
+| **Sub-Stage**  | **Action / Node Name** | **Tool / Technology Implied**                               |
+| -------------- | ---------------------- | ----------------------------------------------------------- |
+| **Deployment** | AWS EC2 VM Deploy      | Jenkins SSH Plugin, Ansible, Terraform, or AWS CodeDeploy   |
+| **Testing**    | Integration Testing    | Selenium, Postman/Newman, or specialized testing frameworks |
+
+#### Continuous Delivery (CDEL)
+
+This stage includes deploying to a container orchestration platform (Kubernetes), dynamic scanning, and serverless deployment.
+
+| **Sub-Stage**                | **Action / Node Name**          | **Tool / Technology Implied**                       |
+| ---------------------------- | ------------------------------- | --------------------------------------------------- |
+| **Container Orchestration**  | Update Docker Image Tags        | Docker CLI or registry API                          |
+|                              | Kubernetes Deploy               | kubectl, Helm, or Jenkins Kubernetes Plugin         |
+| **Dynamic Scan**             | DAST OWASP ZAP                  | OWASP ZAP (Dynamic Analysis Tool)                   |
+| **Review**                   | Approval Stage                  | Manual input step in Jenkins Pipeline               |
+| **Serverless Deployment**    | AWS Lambda Deploy               | AWS SAM, Serverless Framework, or AWS CLI           |
+| **Serverless Configuration** | Update Lambda Configurations    | AWS CLI or specialized deployment tools             |
+| **Serverless Testing**       | AWS Lambda Invocation / Testing | Automated API calls using integration testing tools |
+
+#### Post Build
+
+This final stage aggregates reports and sends notifications.
+
+| **Sub-Stage**          | **Action / Node Name**                     | **Tool / Technology Implied**                            |
+| ---------------------- | ------------------------------------------ | -------------------------------------------------------- |
+| **Report Aggregation** | Unit Test Reports                          | JUnit XML format                                         |
+|                        | Code Coverage Reports                      | Cobertura / JaCoCo format                                |
+|                        | Vulnerability Reports                      | SAST / SCA / DAST reports                                |
+|                        | Dependency Scan Reports                    | OWASP Dependency-Check reports                           |
+| **Publishing**         | Publish to Jenkins                         | Jenkins built-in artifact management / reporting plugins |
+|                        | Publish to AWS S3                          | AWS S3 CLI or specialized S3 upload plugin               |
+| **Notification**       | Slack Notification for All States / Stages | Jenkins Slack Notification Plugin                        |
 
 ## With Regards, `Jakir`
 
