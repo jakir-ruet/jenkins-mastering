@@ -465,7 +465,7 @@ In this stage focuses on `building`, `testing`, `scanning`, and `containerizing`
 |                       | Vulnerability Scan         | Docker Scan, Trivy, Clair (Container Image Scanners)     |
 |                       | Push Image                 | Docker Hub, AWS ECR, Google GCR (Container Registry)     |
 
-> OWASP > Open Web Application Security Project
+> OWASP > Open Web Application Security Project,
 > SAST > Static Application Security Testing
 
 #### Continuous Deployment (CD)
