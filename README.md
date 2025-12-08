@@ -438,7 +438,7 @@ pipeline {
 }
 ```
 
-### Jenkins CI/CD Pipeline Flow
+### Jenkins CI/CD Pipeline Process Flow
 
 This flow is divided into `four` main sections:
 
