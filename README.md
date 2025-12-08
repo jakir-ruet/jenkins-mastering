@@ -447,6 +447,8 @@ This flow is divided into `four` main sections:
 3. Continuous Delivery, and
 4. Post Build.
 
+![Jenkins CI/CD Pipeline Process Flow](/img/jenkins-ci-cd-pipeline.jpg)
+
 #### Continuous Integration (CI)
 
 In this stage focuses on `building`, `testing`, `scanning`, and `containerizing` the code.
